@@ -34,4 +34,4 @@ app.listen(PORT, () => {
   console.log('Environment variables loaded:', {
     EMAIL_PASS: process.env.EMAIL_PASS ? 'Set' : 'Not set'
   });
-}); 
+});
