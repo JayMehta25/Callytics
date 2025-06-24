@@ -1,0 +1,16 @@
+.squares-canvas {
+    display: block; /* Removes any space around the canvas */
+    position: absolute; /* Make it fixed in the viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Take up the full width of the viewport */
+    height: 100vh; /* Take up the full height of the viewport */
+    z-index: -1; /* Ensure canvas stays in the background */
+    background-color: rgb(255, 255, 255);
+
+  }
+  
+  body {
+    margin: 0;
+    overflow-y: scroll; /* Allow vertical scrolling */
+  }

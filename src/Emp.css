@@ -1,0 +1,904 @@
+.registration-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+    perspective: 1000px;
+}
+
+.orb-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.content-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 600px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.main-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    animation: titlePulse 2s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(0.98); }
+}
+
+.form-container {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-title {
+    margin: 0;
+    left: auto;
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+}
+
+.form-title {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 3rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleFloat 3s ease-in-out infinite;
+}
+
+@keyframes titleFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 30px;
+    position: relative;
+    opacity: 0;
+    animation: formGroupEnter 0.5s ease-out forwards;
+    z-index: 1000;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 12px;
+    color: #fff;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(106, 17, 203, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1000;
+}
+
+.form-input, .form-select {
+    width: 100%;
+    padding: 18px 30px;
+    border: 2px solid rgba(106, 17, 203, 0.3);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px rgba(106, 17, 203, 0.1);
+    letter-spacing: 1px;
+}
+
+.form-input:focus, .form-select:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 30px rgba(106, 17, 203, 0.4),
+                0 0 60px rgba(106, 17, 203, 0.2);
+    outline: none;
+    background: rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+}
+
+.form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236a11cb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 20px;
+    padding-right: 50px;
+}
+
+.form-select option {
+    background-color: #000;
+    color: #fff;
+    padding: 15px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+.form-select option:hover {
+    background-color: #6a11cb;
+}
+
+/* Add a subtle animation for the input focus effect */
+@keyframes inputFocus {
+    0% {
+        box-shadow: 0 0 0 0 rgba(106, 17, 203, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(106, 17, 203, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(106, 17, 203, 0);
+    }
+}
+
+.form-input:focus, .form-select:focus {
+    animation: inputFocus 0.8s ease-out;
+}
+
+/* Add a subtle glow effect on hover */
+.form-input:hover, .form-select:hover {
+    border-color: rgba(106, 17, 203, 0.5);
+    box-shadow: 0 0 25px rgba(106, 17, 203, 0.2);
+}
+
+/* Add a subtle animation for the label */
+@keyframes labelFloat {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-2px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.form-group:hover label {
+    animation: labelFloat 0.5s ease-in-out;
+}
+
+.form-button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1000; /* Ensure button appears above overlay */
+}
+
+.form-button:hover {
+    transform: scale(1.05); /* Slight scale on hover */
+    box-shadow: 0 6px 10px rgba(106, 17, 203, 0.5); /* Glow effect on hover */
+}
+
+.transparent {
+    background: transparent;
+}
+
+.error-message {
+    color: #ff6b6b;
+    text-align: center;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1000; /* Ensure error message appears above overlay */
+}
+
+.existing-check, .new-registration {
+    position: relative;
+    z-index: 1000; /* Ensure section appears above overlay */
+}
+
+.employee-list {
+    margin-top: 20px;
+    position: relative;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000; /* Ensure list appears above overlay */
+}
+
+.employee-list select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, #6a11cb 50%),
+                      linear-gradient(135deg, #6a11cb 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1em + 2px),
+                         calc(100% - 15px) calc(1em + 2px);
+    background-size: 5px 5px,
+                    5px 5px;
+    background-repeat: no-repeat;
+    transition: all 0.3s ease;
+}
+
+.employee-list select:hover {
+    border-color: #6a11cb;
+    box-shadow: 0 0 10px rgba(106, 17, 203, 0.3);
+}
+
+.employee-list select:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 15px rgba(106, 17, 203, 0.5);
+}
+
+.employee-list select option {
+    background-color: #000000;
+    color: white;
+    padding: 12px;
+}
+
+.employee-list select option:hover {
+    background-color: #6a11cb;
+}
+
+/* Add a custom scrollbar for the dropdown */
+.employee-list select::-webkit-scrollbar {
+    width: 8px;
+}
+
+.employee-list select::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.employee-list select::-webkit-scrollbar-thumb {
+    background: #6a11cb;
+    border-radius: 4px;
+}
+
+.employee-list select::-webkit-scrollbar-thumb:hover {
+    background: #2575fc;
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.search-existing {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-existing input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.search-existing input:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 10px rgba(106, 17, 203, 0.3);
+}
+
+.search-button {
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.search-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(106, 17, 203, 0.5);
+}
+
+.search-button:active {
+    transform: scale(0.95);
+}
+
+/* Add a subtle animation for search results */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.employee-list select option {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.search-bar {
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1000; /* Ensure search bar appears above overlay */
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 15px rgba(106, 17, 203, 0.3);
+    outline: none;
+}
+
+.employees-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 10px;
+}
+
+.employee-card {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1000; /* Ensure cards appear above overlay */
+}
+
+.employee-card:hover {
+    transform: translateY(-2px);
+    border-color: #6a11cb;
+    box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
+}
+
+.employee-card h4 {
+    color: white;
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+}
+
+.employee-card p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.employee-card .gender {
+    color: #6a11cb;
+    font-weight: bold;
+}
+
+/* Custom scrollbar for the employees list */
+.employees-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.employees-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.employees-list::-webkit-scrollbar-thumb {
+    background: #6a11cb;
+    border-radius: 4px;
+}
+
+.employees-list::-webkit-scrollbar-thumb:hover {
+    background: #2575fc;
+}
+
+/* Card Flip Animation */
+.card-container {
+    perspective: 1000px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-front {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-back {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform: rotateY(180deg);
+}
+
+/* Search Results Animation */
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 10;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+}
+
+.search-results.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.search-result-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background: rgba(106, 17, 203, 0.3);
+}
+
+.search-result-item h4 {
+    margin: 0;
+    color: white;
+    font-size: 1rem;
+}
+
+.search-result-item p {
+    margin: 5px 0 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+/* Flip Button */
+.flip-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    z-index: 5;
+}
+
+.flip-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(106, 17, 203, 0.5);
+}
+
+.flip-button i {
+    font-size: 1.5rem;
+}
+
+/* Options Container */
+.options-container {
+    display: flex;
+    gap: 40px;
+    perspective: 1000px;
+}
+
+.option-button {
+    width: 280px;
+    height: 380px;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.option-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+}
+
+.option-button:hover::before {
+    animation: shine 1.5s infinite;
+}
+
+.option-button i {
+    font-size: 4rem;
+    transition: all 0.5s ease;
+}
+
+.search-option {
+    transform: rotateY(-15deg);
+    background: linear-gradient(135deg, rgba(106, 17, 203, 0.2), rgba(37, 117, 252, 0.2));
+}
+
+.register-option {
+    transform: rotateY(15deg);
+    background: linear-gradient(135deg, rgba(37, 117, 252, 0.2), rgba(106, 17, 203, 0.2));
+}
+
+.option-button:hover {
+    transform: rotateY(0) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Search Section */
+.search-section {
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: searchSectionEnter 0.8s ease-out forwards;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.search-container {
+    position: relative;
+    width: 100%;
+}
+
+.search-input {
+    width: 100%;
+    padding: 20px 60px 20px 30px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 30px rgba(106, 17, 203, 0.3);
+    transform: scale(1.02);
+    outline: none;
+}
+
+.search-button {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-button:hover {
+    color: #6a11cb;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Search Result Container */
+.search-result-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    transform-style: preserve-3d;
+    animation: resultFloat 0.8s ease-out forwards;
+}
+
+.employee-info {
+    text-align: center;
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+}
+
+.employee-info h3 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.employee-info p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 10px 0;
+}
+
+.proceed-button {
+    width: 100%;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.proceed-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(106, 17, 203, 0.4);
+}
+
+/* Register Section */
+.register-section {
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    animation: registerSectionEnter 0.8s ease-out forwards;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes formGroupEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-button {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 20px;
+    opacity: 0;
+    animation: buttonEnter 0.5s ease-out forwards 0.4s;
+}
+
+@keyframes buttonEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(106, 17, 203, 0.4);
+}
+
+/* Section Header */
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.section-header .back-button {
+    position: absolute;
+    left: 0;
+    margin-right: 20px;
+}
+
+/* Back Button */
+.back-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-2px);
+}
+
+.back-button i {
+    font-size: 1.2rem;
+}
+
+/* Animations */
+@keyframes shine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+@keyframes searchSectionEnter {
+    from {
+        opacity: 0;
+        transform: translateZ(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateZ(0);
+    }
+}
+
+@keyframes resultFloat {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes registerSectionEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
