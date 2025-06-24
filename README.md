@@ -1,33 +1,30 @@
-# CallTytics Backend
+# Backend for Employee Registration System
 
-Backend server for CallTytics AI application.
+This is the backend for the employee registration system, which uses MongoDB Atlas for data storage.
 
 ## Setup
 
 1. Install dependencies:
-```bash
-npm install
-```
+   ```
+   npm install
+   ```
 
-2. Create a `.env` file with the following variables:
-```
-EMAIL_PASS=your_gmail_app_password
-```
+2. Set up MongoDB Atlas:
+   - Create a MongoDB Atlas account at [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas)
+   - Create two separate clusters (one for employees, one for managers)
+   - Set up a database user with read/write permissions
+   - Add your IP address to the IP whitelist
+   - Get your connection strings from the "Connect" button
 
-3. Start the development server:
-```bash
-npm run dev
-```
+3. Configure environment variables:
+   - Copy the `.env.example` file to `.env`
+   - Update the `MONGODB_URI` with your employee database connection string
+   - Update the `MANAGER_MONGODB_URI` with your manager database connection string
 
-4. Start the production server:
-```bash
-npm start
-```
-
-## Environment Variables
-
-- `EMAIL_PASS`: Gmail app password for sending OTP emails
-- `PORT`: Server port (default: 5005)
+4. Start the server:
+   ```
+   npm run dev
+   ```
 
 ## MongoDB Atlas Connection
 
